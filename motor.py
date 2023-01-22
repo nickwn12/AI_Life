@@ -25,3 +25,6 @@ class MOTOR:
         targetAngles = np.linspace(-np.pi, np.pi, c.numSteps)
         self.motorValues = np.sin(
             targetAngles * self.frequency + self.offset) * self.amplitude
+
+    def Save_Values(self):
+        np.save("data/" + self.jointName + ".npy", self.values)
