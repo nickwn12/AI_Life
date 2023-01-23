@@ -6,9 +6,10 @@ import pyrosim.pyrosim as pyrosim
 
 import pyrosim.constants as c
 
-class NEURON: 
 
-    def __init__(self,line):
+class NEURON:
+
+    def __init__(self, line):
 
         self.Determine_Name(line)
 
@@ -20,9 +21,9 @@ class NEURON:
 
         self.Set_Value(0.0)
 
-    def Add_To_Value( self, value ):
+    def Add_To_Value(self, value):
 
-        self.Set_Value( self.Get_Value() + value )
+        self.Set_Value(self.Get_Value() + value)
 
     def Get_Joint_Name(self):
 
@@ -62,7 +63,7 @@ class NEURON:
 
         # print("")
 
-    def Set_Value(self,value):
+    def Set_Value(self, value):
 
         self.value = value
 
@@ -70,14 +71,27 @@ class NEURON:
         self.Set_Value(pyrosim.Get_Touch_Sensor_Value_For_Link(
             self.Get_Link_Name()))
 
-    def Update_Hidden_Or_Motor_Neuron(self):
-        self.Set_Value(math.pi/4)
+    def Update_Hidden_Or_Motor_Neuron(self, neurons, synapses):
+        self.value = 0
+        print(self.value)
+        for synapse in synapses.values():
+            if synapse.targetNeuronName == self.name:
+                self.Allow_Presynaptic_Neuron_To_Influence_Me(
+                    synapse.weight, neurons[synapse.sourceNeuronName].Get_Value())
+        self.Threshold()
+        print(self.value)
+        return
+
+    def Allow_Presynaptic_Neuron_To_Influence_Me(self, weight, value):
+        self.Add_To_Value(weight * value)
+
         pass
- 
+
 
 # -------------------------- Private methods -------------------------
 
-    def Determine_Name(self,line):
+
+    def Determine_Name(self, line):
 
         if "name" in line:
 
@@ -85,7 +99,7 @@ class NEURON:
 
             self.name = splitLine[1]
 
-    def Determine_Type(self,line):
+    def Determine_Type(self, line):
 
         if "sensor" in line:
 
@@ -101,17 +115,17 @@ class NEURON:
 
     def Print_Name(self):
 
-       print(self.name)
+        print(self.name)
 
     def Print_Type(self):
 
-       print(self.type)
+        print(self.type)
 
     def Print_Value(self):
 
-       print(self.value , " " , end="" )
+        print(self.value, " ", end="")
 
-    def Search_For_Joint_Name(self,line):
+    def Search_For_Joint_Name(self, line):
 
         if "jointName" in line:
 
@@ -119,7 +133,7 @@ class NEURON:
 
             self.jointName = splitLine[5]
 
-    def Search_For_Link_Name(self,line):
+    def Search_For_Link_Name(self, line):
 
         if "linkName" in line:
 

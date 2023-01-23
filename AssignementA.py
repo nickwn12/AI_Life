@@ -9,8 +9,9 @@ import constants as c
 from simulation import SIMULATION
 from robot import ROBOT
 from world import WORLD
+from generate import Generate_Brain
 
-
+Generate_Brain()
 simulation = SIMULATION()
 simulation.Run()
 # robot = ROBOT()
