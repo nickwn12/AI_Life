@@ -19,11 +19,10 @@ class SIMULATION:
 
     def Run(self):
         for i in range(c.numSteps):
-            
-            print(i)
             p.stepSimulation()
             self.robot.Sense(i)
-            self.robot.Act(i)
+            self.robot.Think()
+            self.robot.Act()
             time.sleep(.01)
 
     # def __del__(self):
