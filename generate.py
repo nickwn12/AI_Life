@@ -1,3 +1,4 @@
+import random
 import pyrosim.pyrosim as pyrosim
 
 
@@ -65,11 +66,11 @@ def Generate_Brain():
     # pyrosim.Send_Synapse(sourceNeuronName=1, targetNeuronName=3, weight=2)
     # pyrosim.Send_Synapse(sourceNeuronName=1, targetNeuronName=4, weight=2)
 
-    pyrosim.Send_Synapse(sourceNeuronName=2, targetNeuronName=4, weight=-2)
-    pyrosim.Send_Synapse(sourceNeuronName=2, targetNeuronName=3, weight=1)
+    for i in range(3):
+        for j in range(2):
+            pyrosim.Send_Synapse(sourceNeuronName=i,
+                                 targetNeuronName=i + 3, weight=(random.random() - .5) * 2)
 
-    pyrosim.Send_Synapse(sourceNeuronName=1, targetNeuronName=4, weight=-1)
-    pyrosim.Send_Synapse(sourceNeuronName=1, targetNeuronName=3, weight=-2)
     pyrosim.End()
 
 
