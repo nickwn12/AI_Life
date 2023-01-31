@@ -59,9 +59,26 @@ class PARALLEL_HILL_CLIMBER:
             self.children[child].Mutate()
 
     def Select(self):
+        best = 0
         for parent in self.parents:
-            if self.children[parent].fitness > self.parents[parent].fitness:
-                self.parents[parent] = self.children[parent]
+            if self.parents[parent].fitness > self.parents[best].fitness:
+                best = parent
+        curBest = self.parents[best].fitness
+        bestIsChild = False
+        for parent in self.parents:
+            if curBest < self.children[parent].fitness:
+                curBest = self.children[parent].fitness
+                bestIsChild = True
+                bestChild = parent
+        
+        if bestIsChild:
+            for parent in self.parents:
+                self.parents[parent] = copy.deepcopy(self.children[bestChild])
+        else:
+            bstParent = copy.deepcopy(self.parents[best])
+            for parent in self.parents:
+                self.parents[parent] = copy.deepcopy(bstParent)
+
 
     def Print(self):
         for parent in self.parents:

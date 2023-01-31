@@ -57,9 +57,21 @@ class SOLUTION:
         pyrosim.End()
 
     def Mutate(self):
-        randomRow = random.randint(0, 2)
-        randomColumn = random.randint(0, 1)
-        self.weights[randomRow, randomColumn] = random.random() * 2 - 1
+        if random.random() > .55:
+            for i in range(3):
+                for j in range(2):
+                    if random.random() > .75:
+                        curWeight = self.weights[i, j]
+                        curWeight = curWeight + .25 * (random.random() - .5)
+                        curWeight = min(curWeight, 1)
+                        curWeight = max(curWeight, -1)
+                        self.weights[i, j] = curWeight
+
+       
+        else:
+            randomRow = random.randint(0, 2)
+            randomColumn = random.randint(0, 1)
+            self.weights[randomRow, randomColumn] = random.random() * 2 - 1
 
     def Create_Brain(self):
         pyrosim.Start_NeuralNetwork("brain" + str(self.myID)+".nndf")
