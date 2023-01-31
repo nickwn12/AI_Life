@@ -75,6 +75,3 @@ def Generate_Brain():
 
 
 # Create_Robot()
-Generate_Body()
-Generate_Brain()
-Create_World()
