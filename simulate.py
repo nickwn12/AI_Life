@@ -10,7 +10,11 @@ from simulation import SIMULATION
 from robot import ROBOT
 from world import WORLD
 from generate import Generate_Brain
+import sys
 
-Generate_Brain()
-simulation = SIMULATION()
+# Generate_Brain()
+
+directOrGUI = sys.argv[1]
+simulation = SIMULATION(directOrGUI)
 simulation.Run()
+simulation.Get_Fitness()
