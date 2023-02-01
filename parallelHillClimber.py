@@ -23,9 +23,6 @@ class PARALLEL_HILL_CLIMBER:
             print("Cur Gen is", currentGeneration)
             self.Evolve_For_One_Generation()
 
-        # for parent in self.parents.values():
-        #     parent.Wait_For_Simulation_To_End()
-
     def Evolve_For_One_Generation(self):
 
         self.Spawn()
@@ -33,12 +30,11 @@ class PARALLEL_HILL_CLIMBER:
         self.Evaluate(self.children)
         self.Select()
         self.Print()
-        # self.Mutate()
 
     def Evaluate(self, solutions):
         for solution in solutions.values():
             solution.Start_Simulation("DIRECT")
-            # parent.Wait_For_Simulation_To_End()
+            # solution.Wait_For_Simulation_To_End()
             # numberOfGenerations = c.numberOfGenerations
             # for currentGeneration in range(numberOfGenerations):
             #     self.Evolve_For_One_Generation()

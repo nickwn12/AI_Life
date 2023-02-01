@@ -5,6 +5,10 @@ phc = PARALLEL_HILL_CLIMBER()
 # phc.Show_Best()
 phc.Evolve()
 phc.Show_Best()
+input("Press Enter to continue...")
+phc.Show_Best()
+
 # for i in range(5):
 #     os.system("python3 generate.py")
 #     os.system("python3 simulate.py")
+

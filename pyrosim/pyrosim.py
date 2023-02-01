@@ -48,7 +48,7 @@ def End_Model():
 def Get_Touch_Sensor_Value_For_Link(linkName):
 
     touchValue = -1.0
-
+    print(linkNamesToIndices)
     desiredLinkIndex = linkNamesToIndices[linkName]
 
     pts = p.getContactPoints()
@@ -142,11 +142,11 @@ def Send_Cube(name="default", pos=[0, 0, 0], size=[1, 1, 1]):
     availableLinkIndex = availableLinkIndex + 1
 
 
-def Send_Joint(name, parent, child, type, position):
+def Send_Joint(name, parent, child, type, position, jointAxis):
 
     joint = JOINT(name, parent, child, type, position)
 
-    joint.Save(f)
+    joint.Save(f, jointAxis)
 
 
 def Send_Motor_Neuron(name, jointName):
@@ -168,7 +168,7 @@ def Send_Synapse(sourceNeuronName, targetNeuronName, weight):
 
 
 def Set_Motor_For_Joint(bodyIndex, jointName, controlMode, targetPosition, maxForce):
-
+    print(jointNamesToIndices)
     p.setJointMotorControl2(
 
         bodyIndex=bodyIndex,
