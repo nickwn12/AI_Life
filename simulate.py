@@ -9,7 +9,7 @@ import constants as c
 from simulation import SIMULATION
 from robot import ROBOT
 from world import WORLD
-from generate import Generate_Brain
+# from generate import Generate_Brain
 import sys
 
 # Generate_Brain()
