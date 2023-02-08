@@ -5,3 +5,5 @@ longer, stronger, and able to have different widths for the different body parts
 The Fitness function is based soley off how far fowards it can propell itself. 
 This is a video of the snake functioning. 
 https://youtube.com/shorts/smRA7_PbGe0?feature=share
+
+You can create the snake by running the search python file which does everything that it needs to do. 
