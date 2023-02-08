@@ -38,25 +38,44 @@ class SOLUTION:
         pyrosim.End()
 
     def Create_Body(self):
-        length, width, height = 1, 1, 1
+        length, width, height = .3, .3, .3
         pyrosim.Start_URDF("body.urdf")
 
         pyrosim.Send_Cube(name="Torso", pos=[0, 0, .5 * height], size=[
             length, width, height])
 
         pyrosim.Send_Joint(name="Torso_Back", parent="Torso",
-                           child="BackLeg", type="revolute", position=[length * 0, width * -1, height/2], jointAxis="0 0 1"
+                           child="Back", type="revolute", position=[length * 0, width * -1, height/2], jointAxis="1 0 1"
                            )
 
-        pyrosim.Send_Cube(name="BackLeg", pos=[0, 0, -.15], size=[
+        pyrosim.Send_Cube(name="Back", pos=[0, 0, -.15], size=[
             .2, 1, .2])
 
-        pyrosim.Send_Joint(name="Back_Back2", parent="BackLeg",
-                           child="Back2", type="revolute", position=[0, -.5, .0], jointAxis="0 1 0"
+        pyrosim.Send_Joint(name="Back_Back2", parent="Back",
+                           child="Back2", type="revolute", position=[0, -.5, .0], jointAxis="0 1 1"
                            )
 
         pyrosim.Send_Cube(name="Back2", pos=[0, -.5, -.15], size=[
             .2, 1, .2])
+
+        for i in range(c.numSensorNeurons - 2):
+
+            if i % 3 == 1:
+                curSize = [.1, 1, .1]
+                jointAxis = "0 0 1"
+            elif i % 3 == 2:
+                curSize = [.4, 1, .2]
+                jointAxis = "1 0 0"
+            else:
+                jointAxis = "0 0 1"
+                curSize = [.2, 1, .4]
+            pyrosim.Send_Joint(name="Back" + str(i + 2)+"_Back" + str(i + 3), parent="Back" + str(i + 2),
+                               child="Back" + str(i + 3), type="revolute", position=[0, -1, .0], jointAxis=jointAxis
+                               )
+
+            pyrosim.Send_Cube(name="Back" + str(i + 3),
+                              pos=[0, -.5, -.15], size=curSize)
+
         pyrosim.End()
 
     def Mutate(self):
@@ -68,9 +87,12 @@ class SOLUTION:
         pyrosim.Start_NeuralNetwork("brain" + str(self.myID)+".nndf")
         pyrosim.Send_Sensor_Neuron(name=0, linkName="Torso")
         pyrosim.Send_Sensor_Neuron(name=1, linkName="Back")
-        pyrosim.Send_Sensor_Neuron(name=2, linkName="Back2")
-        pyrosim.Send_Motor_Neuron(name=3, jointName="Torso_Back")
-        pyrosim.Send_Motor_Neuron(name=4, jointName="Back_Back2")
+
+        for i in range(c.numSensorNeurons - 2):
+            pyrosim.Send_Sensor_Neuron(
+                name=i + 2, linkName="Back" + str(2 + i))
+            pyrosim.Send_Motor_Neuron(
+                name=i + c.numSensorNeurons, jointName="Back"+str(2 + i)+"_Back"+str(3 + i))
 
         # pyrosim.Send_Synapse(sourceNeuronName=1, targetNeuronName=3, weight=2)
         # pyrosim.Send_Synapse(sourceNeuronName=1, targetNeuronName=4, weight=2)

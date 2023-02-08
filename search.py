@@ -2,7 +2,7 @@ import os
 from parallelHillClimber import PARALLEL_HILL_CLIMBER
 
 phc = PARALLEL_HILL_CLIMBER()
-phc.Show_Body()
+# phc.Show_Body()
 phc.Evolve()
 phc.Show_Best()
 input("Press Enter to continue...")

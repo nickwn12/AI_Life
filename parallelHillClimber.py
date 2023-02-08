@@ -24,7 +24,6 @@ class PARALLEL_HILL_CLIMBER:
             self.Evolve_For_One_Generation()
 
     def Evolve_For_One_Generation(self):
-
         self.Spawn()
         self.Mutate()
         self.Evaluate(self.children)
@@ -55,6 +54,9 @@ class PARALLEL_HILL_CLIMBER:
             self.children[child].Mutate()
 
     def Select(self):
+        # for parent in self.parents:
+        #     if self.children[parent].fitness > self.parents[parent].fitness:
+        #         self.parents[parent] = self.children[parent]
         best = 0
         for parent in self.parents:
             if self.parents[parent].fitness > self.parents[best].fitness:
