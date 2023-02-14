@@ -2,11 +2,12 @@ import os
 from parallelHillClimber import PARALLEL_HILL_CLIMBER
 
 phc = PARALLEL_HILL_CLIMBER()
-# phc.Show_Body()
-phc.Evolve()
-phc.Show_Best()
-input("Press Enter to continue...")
-phc.Show_Best()
+phc.Show_Body()
+
+# phc.Evolve()
+# phc.Show_Best()
+# input("Press Enter to continue...")
+# phc.Show_Best()
 
 # for i in range(5):
 #     os.system("python3 generate.py")
