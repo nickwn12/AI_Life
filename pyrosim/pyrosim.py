@@ -48,7 +48,9 @@ def End_Model():
 def Get_Touch_Sensor_Value_For_Link(linkName):
 
     touchValue = -1.0
-    # print(linkNamesToIndices)
+    print(linkNamesToIndices)
+    if linkName == "0":
+        linkName = "Joint0"
     desiredLinkIndex = linkNamesToIndices[linkName]
     print(linkName)
     print(desiredLinkIndex)

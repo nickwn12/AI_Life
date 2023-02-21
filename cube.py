@@ -1,4 +1,5 @@
 import random
+import constants as c
 
 
 class CUBE():
@@ -21,16 +22,15 @@ class CUBE():
         self.Zmax = self.centerZ + self.height/2
 
         self.kids = {0: None, 1: None, 2: None, 3: None, 4: None, 5: None}
+
     def nameCube(self, name, parent):
         self.cubeName = name
         self.parent = parent
 
     def addCubeRandomSide(self, cubes):
-        height, width, length = .25 + random.random(), .25 + random.random(), .25 + \
-            random.random()
-        height, width, length = round(height, 1), round(
-            width, 1), round(length, 1)
-        height, width, length = 1, 1, 1
+  
+        length, width, height = random.random() * c.scale + c.baseLength, c.baseWidth + random.random() * \
+            c.scale, c.baseHeight + random.random() * c.scale
         avalibleSides = []
         for i in range(6):
             if self.kids[i] == None:
@@ -65,7 +65,7 @@ class CUBE():
 
         cubes.addCube(curCube, self.cubeName)
         self.kids[chosenSide] = curCube
-        return
+        return True
 
     def intersect(self, Cube):
         if self.Xmin >= Cube.Xmax or self.Xmax <= Cube.Xmin:

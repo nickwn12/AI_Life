@@ -11,6 +11,8 @@ numberOfGenerations = 10
 populationSize = 1
 numLinks = 10
 numSensors = random.randint(1, numLinks)
+# numSensors = numLinks
+# Sensors = list(range(numLinks))
 Sensors = random.sample(range(0, numLinks), k=numSensors)
 Sensors.sort()
 print(Sensors, numSensors)
