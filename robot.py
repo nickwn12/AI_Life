@@ -16,13 +16,14 @@ class ROBOT:
         self.motors = {}
         self.solutionID = solutionID
 
-        self.robotId = p.loadURDF("body.urdf")
+        self.robotId = p.loadURDF("summerbod.urdf")
         pyrosim.Prepare_To_Simulate(self.robotId)
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
 
-        self.nn = NEURAL_NETWORK("brain"+str(self.solutionID)+".nndf")
-        os.system("rm brain"+str(self.solutionID)+".nndf")
+        # self.nn = NEURAL_NETWORK("brain"+str(self.solutionID)+".nndf")
+        self.nn = NEURAL_NETWORK("fuckthehaters.nndf")
+        # os.system("rm brain"+str(self.solutionID)+".nndf")
 
     def Prepare_To_Sense(self):
         self.sensors = {}
