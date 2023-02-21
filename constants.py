@@ -1,6 +1,6 @@
 import numpy as np
 import random
-numSteps = 100
+numSteps = 100000
 amplitudeFrontLeg = np.pi/2
 frequencyFrontLeg = 500
 phaseOffsetFrontLeg = 0
