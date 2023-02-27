@@ -15,8 +15,7 @@ robotId = p.loadURDF("summerbod.urdf")
 p.loadSDF("world.sdf")
 
 pyrosim.Prepare_To_Simulate(robotId)
-
 for i in range(10000):
     p.stepSimulation()
-    time.sleep(.01)
+    time.sleep(.0001)
     print(i)

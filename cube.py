@@ -66,6 +66,16 @@ class CUBE():
         cubes.addCube(curCube, self.cubeName)
         self.kids[chosenSide] = curCube
         return True
+    
+    def setSize(self, height, length, width):
+        self.height = height
+        self.length = length
+        self.width = width
+
+    def mutateSize(self):
+        self.height = self.height * (random.random() - .5)/10
+        self.length = self.length * (random.random() - .5)/10
+        self.width = self.width * (random.random() - .5)/10
 
     def intersect(self, Cube):
         if self.Xmin >= Cube.Xmax or self.Xmax <= Cube.Xmin:

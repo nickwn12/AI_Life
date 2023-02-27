@@ -3,13 +3,49 @@ import numpy as np
 import pyrosim.pyrosim as pyrosim
 from cube import CUBE
 import constants as c
+import copy
 
 
 class CUBES:
-    def __init__(self):
+    def __init__(self, x=c.numLinks):
         self.cubes = {}
         self.familyTree = {}
         self.curIndx = 0
+        self.weights = np.random.rand(c.numSensors, c.numMotorNeurons) * 2 - 1
+        self.createBodyWithXCubes(x)
+
+    def getWeights(self):
+        return self.weights
+
+    def setWeights(self, weights):
+        self.weights = weights
+
+    def mutate(self):
+        if random.random() < .5:
+            self.mutateBody()
+        else:
+            self.mutateBrain()
+
+    def mutateBrain(self):
+        randomRow = random.randint(0, c.numSensors - 1)
+        randomColumn = random.randint(0, c.numMotorNeurons - 1)
+        self.weights[randomRow, randomColumn] = random.random() * 2 - 1
+
+    def mutateBody(self):
+        randomCube = self.getRandomCube()
+        randomCube.mutateSize()
+
+    def addCube1(self):
+        length, width, height = random.random() * c.scale + c.baseLength, c.baseWidth + random.random() * \
+            c.scale, c.baseHeight + random.random() * c.scale
+        cube1 = CUBE(length, width, height, True, [0, 0, 0])
+        self.addCube(cube1)
+        return
+
+    def createBodyWithXCubes(self, x=c.numLinks):
+        self.addCube1()
+        self.addXCubes(x)
+        return
 
     def returnMinZ(self):
         MinZ = 0
@@ -44,8 +80,8 @@ class CUBES:
             if self.mutateCubes():
                 i += 1
 
-    def buildBody(self):
-        pyrosim.Start_URDF("summerbod.urdf")
+    def createBody(self, fileName="summerbod.urdf"):
+        pyrosim.Start_URDF(fileName)
 
         torsoCube = self.cubes[0]
         # torsoCube = CUBE()
@@ -62,10 +98,14 @@ class CUBES:
         pyrosim.Send_Cube(name=str(torsoCube.cubeName), pos=[0, 0, -BaseHeight], size=[
             torsoCube.length, torsoCube.width, torsoCube.height], rgb=rgb)
 
-        stack = list(self.familyTree[0])
+        stack = []
+        for value in self.familyTree[0]:
+            stack.append(value)
+        # stack += self.familyTree[0]
         xAnchor = 0
         yAnchor = 0
         zAnchor = 0
+
         while len(stack) > 0:
 
             child = self.cubes[stack[0]]
@@ -106,14 +146,21 @@ class CUBES:
                 xAnchorChild = .5
                 if Xdif < 0:
                     xAnchorChild *= -1
+
+                JointAxis1 = "0 1 0"
+                JointAxis2 = "0 1 0"
             elif abs(Ydif) > abs(Zdif):
                 yAnchorChild = .5
                 if Ydif < 0:
                     yAnchorChild *= -1
+                JointAxis1 = "1 0 0"
+                JointAxis2 = "1 0 0"
             else:
                 zAnchorChild = .5
                 if Zdif < 0:
                     zAnchorChild *= -1
+                JointAxis1 = "0 1 0"
+                JointAxis2 = "1 0 0"
 
             if child.cubeName in c.Sensors:
                 colorName = "Blue"
@@ -123,7 +170,7 @@ class CUBES:
                 rgb = [1, 1, 1]
 
             pyrosim.Send_Joint(name="Joint" + str(parent.cubeName)+"_" + str(child.cubeName), parent=str(parent.cubeName),
-                               child=str(child.cubeName), type="revolute", position=[parent.length * (xAnchor + xAnchorChild), parent.width * (yAnchor + yAnchorChild), parent.height * (zAnchor + zAnchorChild)], jointAxis="0 0 1"
+                               child=str(child.cubeName), type="revolute", position=[parent.length * (xAnchor + xAnchorChild), parent.width * (yAnchor + yAnchorChild), parent.height * (zAnchor + zAnchorChild)], jointAxis=JointAxis1
                                )
 
             pyrosim.Send_Cube(name=str(child.cubeName), pos=[child.length * xAnchorChild, child.width * yAnchorChild, child.height * zAnchorChild - BaseHeight], size=[
@@ -136,13 +183,14 @@ class CUBES:
 
         return
 
-    def generateBrain(self):
-        pyrosim.Start_NeuralNetwork("fuckthehaters.nndf")
+    def createBrain(self, fileName="fuckthehaters.nndf"):
+        pyrosim.Start_NeuralNetwork(fileName)
         for i, sensorNum in enumerate(c.Sensors):
             pyrosim.Send_Sensor_Neuron(
                 name=i, linkName=str(sensorNum))
-
-        stack = self.familyTree[0]
+        stack = []
+        stack += self.familyTree[0]
+        # stack = self.familyTree[0]
         Name = 0
         while len(stack) > 0:
             child = self.cubes[stack[0]]
@@ -154,12 +202,9 @@ class CUBES:
                 stack += self.familyTree[child.cubeName]
             stack.pop(0)
 
-        weights = np.random.rand(
-            c.numSensors, c.numMotorNeurons) * 2 - 1
-
         for currentRow, sensorNum in enumerate(c.Sensors):
-            for currentColumn in range(c.numLinks - 1):
+            for currentColumn in range(c.numMotorNeurons):
                 pyrosim.Send_Synapse(sourceNeuronName=currentRow,
-                                     targetNeuronName=currentColumn + c.numSensors, weight=weights[currentRow][currentColumn])
+                                     targetNeuronName=currentColumn + c.numSensors, weight=self.weights[currentRow][currentColumn])
 
         pyrosim.End()

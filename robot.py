@@ -16,13 +16,13 @@ class ROBOT:
         self.motors = {}
         self.solutionID = solutionID
 
-        self.robotId = p.loadURDF("summerbod.urdf")
+        self.robotId = p.loadURDF("bodyCubes"+str(solutionID)+".urdf")
         pyrosim.Prepare_To_Simulate(self.robotId)
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
 
-        # self.nn = NEURAL_NETWORK("brain"+str(self.solutionID)+".nndf")
-        self.nn = NEURAL_NETWORK("fuckthehaters.nndf")
+        self.nn = NEURAL_NETWORK("brainCubes"+str(self.solutionID)+".nndf")
+        # self.nn = NEURAL_NETWORK("fuckthehaters.nndf")
         # os.system("rm brain"+str(self.solutionID)+".nndf")
 
     def Prepare_To_Sense(self):
@@ -36,32 +36,35 @@ class ROBOT:
             self.motors[jointName] = MOTOR(jointName)
 
     def Sense(self, itr):
+        print("think")
         for sensor in self.sensors:
             self.sensors[sensor].Get_Value(itr)
 
     def Act(self):
+        print("act")
         for neuronName in self.nn.Get_Neuron_Names():
             if self.nn.Is_Motor_Neuron(neuronName):
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
-                # self.nn.Print()
                 desiredAngle = self.nn.Get_Value_Of(
                     neuronName) * c.motorJointRange
                 self.motors[jointName].Set_Value(self, desiredAngle)
-                # print(neuronName, jointName, desiredAngle, c.motorJointRange)
-
-        #
-        # for motor in self.motors:
 
     def Think(self):
         self.nn.Update()
-        # self.nn.Print()
 
     def Get_Fitness(self):
-        stateOfLinkZero = p.getLinkState(self.robotId, 0)
-        positionOfLinkZero = stateOfLinkZero[0]
-        yCoordinateOfLinkZero = positionOfLinkZero[1]
+        best = 10000000
+        for i in range(c.numLinks):
+            stateOfLinkZero = p.getLinkState(self.robotId, i)
+            if stateOfLinkZero is None:
+                continue
+            positionOfLinkZero = stateOfLinkZero[0]
+            yCoordinateOfLinkZero = positionOfLinkZero[1]
+            if yCoordinateOfLinkZero < best:
+                best = yCoordinateOfLinkZero
+
         f = open("temp"+str(self.solutionID)+".txt", "w")
-        f.write(str(yCoordinateOfLinkZero))
+        f.write(str(best))
         f.close()
         os.system("mv temp" + str(self.solutionID) +
                   ".txt fitness" + str(self.solutionID)+".txt")

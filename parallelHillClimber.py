@@ -32,7 +32,7 @@ class PARALLEL_HILL_CLIMBER:
 
     def Evaluate(self, solutions):
         for solution in solutions.values():
-            solution.Start_Simulation("DIRECT")
+            solution.Start_Simulation("GUI")
             # solution.Wait_For_Simulation_To_End()
             # numberOfGenerations = c.numberOfGenerations
             # for currentGeneration in range(numberOfGenerations):
@@ -54,28 +54,28 @@ class PARALLEL_HILL_CLIMBER:
             self.children[child].Mutate()
 
     def Select(self):
+        for parent in self.parents:
+            if self.children[parent].fitness > self.parents[parent].fitness:
+                self.parents[parent] = self.children[parent]
+        # best = 0
         # for parent in self.parents:
-        #     if self.children[parent].fitness > self.parents[parent].fitness:
-        #         self.parents[parent] = self.children[parent]
-        best = 0
-        for parent in self.parents:
-            if self.parents[parent].fitness > self.parents[best].fitness:
-                best = parent
-        curBest = self.parents[best].fitness
-        bestIsChild = False
-        for parent in self.parents:
-            if curBest < self.children[parent].fitness:
-                curBest = self.children[parent].fitness
-                bestIsChild = True
-                bestChild = parent
+        #     if self.parents[parent].fitness > self.parents[best].fitness:
+        #         best = parent
+        # curBest = self.parents[best].fitness
+        # bestIsChild = False
+        # for parent in self.parents:
+        #     if curBest < self.children[parent].fitness:
+        #         curBest = self.children[parent].fitness
+        #         bestIsChild = True
+        #         bestChild = parent
 
-        if bestIsChild:
-            for parent in self.parents:
-                self.parents[parent] = copy.deepcopy(self.children[bestChild])
-        else:
-            bstParent = copy.deepcopy(self.parents[best])
-            for parent in self.parents:
-                self.parents[parent] = copy.deepcopy(bstParent)
+        # if bestIsChild:
+        #     for parent in self.parents:
+        #         self.parents[parent] = copy.deepcopy(self.children[bestChild])
+        # else:
+        #     bstParent = copy.deepcopy(self.parents[best])
+        #     for parent in self.parents:
+        #         self.parents[parent] = copy.deepcopy(bstParent)
 
     def Print(self):
         for parent in self.parents:
