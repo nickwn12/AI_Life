@@ -4,6 +4,8 @@ import copy
 import os
 from solutionCubes import SOLUTIONCUBES
 import random
+import pickle
+import numpy as np
 
 
 class PARALLEL_HILL_CLIMBER_CUBES:
@@ -13,11 +15,27 @@ class PARALLEL_HILL_CLIMBER_CUBES:
         os.system("rm fitness*.txt")
         self.parents = {}
         self.nextAvailableID = 1
+        self.generationsTrained = 0
+        self.maxFit = None
+        self.graphData = np.zeros([c.numberOfGenerations, c.populationSize])
         for i in range(c.populationSize):
             self.parents[i] = SOLUTIONCUBES(self.nextAvailableID)
             self.nextAvailableID += 1
 
         # self.parent = SOLUTION()
+
+    def save(self):
+
+        dir_list = os.listdir("pickleFolder/")
+        curMax = 0
+        for fileName in dir_list:
+            strNum = fileName.split("test")[-1]
+            strNum = strNum.split(".")[0]
+            Num = int(strNum)
+            if Num > curMax:
+                curMax = Num
+        curMax += 1
+        pickle.dump(self, open('pickleFolder/test'+str(curMax)+'.pkl', 'wb'))
 
     def Evolve(self):
         self.Evaluate(self.parents)
@@ -26,12 +44,23 @@ class PARALLEL_HILL_CLIMBER_CUBES:
             print("Cur Gen is", currentGeneration)
             self.Evolve_For_One_Generation()
 
+    def recordGeneration(self):
+        for parent in self.parents:
+
+            curFit = self.parents[parent].fitness
+            if self.maxFit is None or self.maxFit < curFit:
+                self.maxFit = curFit
+            self.graphData[self.generationsTrained][parent] = curFit
+
     def Evolve_For_One_Generation(self):
         self.Spawn()
         self.Mutate()
         self.Evaluate(self.children)
         self.Select()
+        self.recordGeneration()
+
         self.Print()
+        self.generationsTrained += 1
 
     def Evaluate(self, solutions):
         for solution in solutions.values():
@@ -60,13 +89,23 @@ class PARALLEL_HILL_CLIMBER_CUBES:
 
     def Select(self):
         # fitnessDict = {}
-        # worstScore = 1000000
-        # for parent in self.parents:
-        #     if self.parents[parent].fitness < self.children[parent].fitness:
-        #         self.parents[parent] = copy.deepcopy(self.children[parent])
-        #     fitnessDict[parent] = self.parents[parent].fitness
-        #     if worstScore > self.parents[parent].fitness:
-        #         worstScore = self.parents[parent].fitness
+
+        for parent in self.parents:
+            parentFit = self.parents[parent].fitness
+            childFit = self.children[parent].fitness
+            if parentFit < childFit and abs(childFit/parentFit) < 2:
+                self.parents[parent] = copy.deepcopy(self.children[parent])
+        worstParent = 0
+        worstScore = self.parents[worstParent].fitness
+
+        bestParent = 0
+        bestScore = self.parents[bestParent].fitness
+        for parent in self.parents:
+            if self.parents[parent].fitness > bestScore:
+                bestScore = self.parents[parent].fitness
+                bestParent = parent
+        if random.random() * 3 < 2:
+            self.parents[worstParent] = copy.deepcopy(self.parents[bestParent])
 
         # totalScore = 0
         # scoreDict = {}
@@ -84,24 +123,11 @@ class PARALLEL_HILL_CLIMBER_CUBES:
         for parent in self.parents:
             if self.parents[parent].fitness > self.parents[best].fitness:
                 best = parent
-        curBest = self.parents[best].fitness
-        bestIsChild = False
-        for parent in self.parents:
-            if curBest < self.children[parent].fitness:
-                curBest = self.children[parent].fitness
-                bestIsChild = True
-                bestChild = parent
 
-        if bestIsChild:
-            for parent in self.parents:
-                if random.random() < .1:
-                    self.parents[parent] = copy.deepcopy(
-                        self.children[bestChild])
-        else:
-            if random.random() < .1:
-                bstParent = copy.deepcopy(self.parents[best])
-                for parent in self.parents:
-                    self.parents[parent] = copy.deepcopy(bstParent)
+        # bstParent = copy.deepcopy(self.parents[best])
+        # for parent in self.parents:
+        #     if random.random() < .1:
+        #         self.parents[parent] = copy.deepcopy(bstParent)
 
     def Print(self):
         for parent in self.parents:
@@ -115,6 +141,7 @@ class PARALLEL_HILL_CLIMBER_CUBES:
             print(self.parents[bestindex].fitness)
             self.parents[bestindex].fitness > self.parents[parent].fitness
             bestindex = parent
+        print(self.parents[bestindex].fitness)
         self.parents[bestindex].Start_Simulation("GUI")
 
     def Show_Body(self):

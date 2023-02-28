@@ -11,7 +11,11 @@ class CUBES:
         self.cubes = {}
         self.familyTree = {}
         self.curIndx = 0
-        self.weights = np.random.rand(c.numSensors, c.numMotorNeurons) * 2 - 1
+        self.numSensors = c.numSensors
+        self.Sensors = c.Sensors
+        self.numMotorNeurons = c.numMotorNeurons
+        self.weights = np.random.rand(
+            self.numSensors, self.numMotorNeurons) * 2 - 1
         self.createBodyWithXCubes(x)
 
     def getWeights(self):
@@ -27,8 +31,8 @@ class CUBES:
             self.mutateBrain()
 
     def mutateBrain(self):
-        randomRow = random.randint(0, c.numSensors - 1)
-        randomColumn = random.randint(0, c.numMotorNeurons - 1)
+        randomRow = random.randint(0, self.numSensors - 1)
+        randomColumn = random.randint(0, self.numMotorNeurons - 1)
         self.weights[randomRow, randomColumn] = random.random() * 2 - 1
 
     def mutateBody(self):
@@ -93,9 +97,9 @@ class CUBES:
             colorName = "Green"
             rgb = [1, 1, 1]
 
-        BaseHeight = self.returnMinZ()
+        BaseHeight = -self.returnMinZ()
 
-        pyrosim.Send_Cube(name=str(torsoCube.cubeName), pos=[0, 0, -BaseHeight], size=[
+        pyrosim.Send_Cube(name=str(torsoCube.cubeName), pos=[0, 0, 0], size=[
             torsoCube.length, torsoCube.width, torsoCube.height], rgb=rgb)
 
         stack = []
@@ -147,13 +151,13 @@ class CUBES:
                 if Xdif < 0:
                     xAnchorChild *= -1
 
-                JointAxis1 = "0 1 0"
+                JointAxis1 = "1 0 0"
                 JointAxis2 = "0 1 0"
             elif abs(Ydif) > abs(Zdif):
                 yAnchorChild = .5
                 if Ydif < 0:
                     yAnchorChild *= -1
-                JointAxis1 = "1 0 0"
+                JointAxis1 = "0 1 0"
                 JointAxis2 = "1 0 0"
             else:
                 zAnchorChild = .5
@@ -162,7 +166,7 @@ class CUBES:
                 JointAxis1 = "0 1 0"
                 JointAxis2 = "1 0 0"
 
-            if child.cubeName in c.Sensors:
+            if child.cubeName in self.Sensors:
                 colorName = "Blue"
                 rgb = [1, 0, 1]
             else:
@@ -173,7 +177,7 @@ class CUBES:
                                child=str(child.cubeName), type="revolute", position=[parent.length * (xAnchor + xAnchorChild), parent.width * (yAnchor + yAnchorChild), parent.height * (zAnchor + zAnchorChild)], jointAxis=JointAxis1
                                )
 
-            pyrosim.Send_Cube(name=str(child.cubeName), pos=[child.length * xAnchorChild, child.width * yAnchorChild, child.height * zAnchorChild - BaseHeight], size=[
+            pyrosim.Send_Cube(name=str(child.cubeName), pos=[child.length * xAnchorChild, child.width * yAnchorChild, 0 + child.height * zAnchorChild], size=[
                 child.length, child.width, child.height], colorName=colorName, rgb=rgb)
 
             if child.cubeName in self.familyTree:
@@ -202,9 +206,9 @@ class CUBES:
                 stack += self.familyTree[child.cubeName]
             stack.pop(0)
 
-        for currentRow, sensorNum in enumerate(c.Sensors):
-            for currentColumn in range(c.numMotorNeurons):
+        for currentRow, sensorNum in enumerate(self.Sensors):
+            for currentColumn in range(self.numMotorNeurons):
                 pyrosim.Send_Synapse(sourceNeuronName=currentRow,
-                                     targetNeuronName=currentColumn + c.numSensors, weight=self.weights[currentRow][currentColumn])
+                                     targetNeuronName=currentColumn + self.numSensors, weight=self.weights[currentRow][currentColumn])
 
         pyrosim.End()

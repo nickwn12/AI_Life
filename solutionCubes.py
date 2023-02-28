@@ -13,6 +13,8 @@ class SOLUTIONCUBES:
         self.cubes = CUBES()
 
     def Start_Simulation(self, directOrGUI):
+        # os.system("rm brainCubes*.nndf")
+        # os.system("rm bodyCubes*.urdf")
         self.cubes.createBody("bodyCubes" + str(self.myID) + ".urdf")
         self.cubes.createBrain("brainCubes" + str(self.myID) + ".nndf")
         self.CreateWorld()

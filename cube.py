@@ -55,13 +55,19 @@ class CUBE():
         elif chosenSide == 5:
             NewCenterZ -= self.height/2 + height/2
 
+        if (NewCenterZ - height/2) < 0:
+            return False
+
         # Check that the new cube does not overlap
         curCube = CUBE(height=height, length=length, width=width,
                        sensor=True, cords=[NewCenterX, NewCenterY, NewCenterZ])
         cubList = cubes.getCubesList()
+
         for cube in cubList:
             if curCube.intersect(cube):
                 return False
+            
+
 
         cubes.addCube(curCube, self.cubeName)
         self.kids[chosenSide] = curCube
