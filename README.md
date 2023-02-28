@@ -51,6 +51,23 @@ I also would want to go to office hours to try and figure out how to avoid platu
 ## How to Run 
 There is a function called the searchCubes function
 All you need to do is run this function in order to show a random body before training. Evolve the model then show the best model of the ones that you have trained already. 
+The settings for the number of links, scaling settings, motor strength, number of gerations, as well as populaiton can all be controlled from the contants
+
+## Graphs of Generations
+
+Individual Graphs
+![Screenshot](/ReadMeImages/Figure_1.png)
+![Screenshot](/ReadMeImages/Figure_2.png)
+![Screenshot](/ReadMeImages/Figure_3.png)
+![Screenshot](/ReadMeImages/Figure_4.png)
+![Screenshot](/ReadMeImages/Figure_5.png)
+![Screenshot](/ReadMeImages/Combined.png)
+
+The results is that I have found that there will be times when the robots will preform much better or worse. I think that this is some level of unpredictablity in the physics simulator but a lot of these machines will be capible of doing amazing things in some runs and with the same body and brain it will do signifigantly worse. I do not know if there is a way to select for this better. But the two things I would add to deal with that would be the sin function of time so it knew where it was in a cycle and did not need to rely on rythic sensor pullings in order to get data from. I would also train it for much much longer. 
+
+
+
+
 ## Acknowledgements
 
  - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
