@@ -51,6 +51,20 @@ I also would want to go to office hours to try and figure out how to avoid platu
 ## How to Run 
 There is a function called the searchCubes function
 All you need to do is run this function in order to show a random body before training. Evolve the model then show the best model of the ones that you have trained already. 
+
+## Graphs of Generations
+
+Individual Graphs
+![Screenshot](/ReadMeImages/Figure_1.png)
+![Screenshot](/ReadMeImages/Figure_2.png)
+![Screenshot](/ReadMeImages/Figure_3.png)
+![Screenshot](/ReadMeImages/Figure_4.png)
+![Screenshot](/ReadMeImages/Figure_5.png)
+![Screenshot](/ReadMeImages/Combined.png)
+
+
+
+
 ## Acknowledgements
 
  - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)

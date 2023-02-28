@@ -17,6 +17,7 @@ class PARALLEL_HILL_CLIMBER_CUBES:
         self.nextAvailableID = 1
         self.generationsTrained = 0
         self.maxFit = None
+        self.maxFitList = []
         self.graphData = np.zeros([c.numberOfGenerations, c.populationSize])
         for i in range(c.populationSize):
             self.parents[i] = SOLUTIONCUBES(self.nextAvailableID)
@@ -46,11 +47,16 @@ class PARALLEL_HILL_CLIMBER_CUBES:
 
     def recordGeneration(self):
         for parent in self.parents:
-
             curFit = self.parents[parent].fitness
             if self.maxFit is None or self.maxFit < curFit:
                 self.maxFit = curFit
             self.graphData[self.generationsTrained][parent] = curFit
+
+    def listRecordData(self):
+        self.maxFitList = []
+        for i in range(self.generationsTrained):
+            curGenFit = max(self.graphData[i])
+            self.maxFitList.append(curGenFit)
 
     def Evolve_For_One_Generation(self):
         self.Spawn()
