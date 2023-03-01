@@ -38,6 +38,11 @@ class PARALLEL_HILL_CLIMBER_CUBES:
         curMax += 1
         pickle.dump(self, open('pickleFolder/test'+str(curMax)+'.pkl', 'wb'))
 
+    def saveBackup(self):
+
+        pickle.dump(self, open('pickleFolder/BackUp/Generation' +
+                    str(self.generationsTrained)+'.pkl', 'wb'))
+
     def Evolve(self):
         self.Evaluate(self.parents)
         numberOfGenerations = c.numberOfGenerations
@@ -64,6 +69,8 @@ class PARALLEL_HILL_CLIMBER_CUBES:
         self.Evaluate(self.children)
         self.Select()
         self.recordGeneration()
+        if self.generationsTrained % 10 == 0:
+            self.saveBackup()
 
         self.Print()
         self.generationsTrained += 1
@@ -149,6 +156,15 @@ class PARALLEL_HILL_CLIMBER_CUBES:
             bestindex = parent
         print(self.parents[bestindex].fitness)
         self.parents[bestindex].Start_Simulation("GUI")
+
+    def Show_All(self):
+        bestindex = 0
+        scores = []
+        for parent in self.parents:
+            scores.append((parent, self.parents[parent].fitness))
+        scores.sort(key=lambda x: x[-1])
+        for score in scores:
+            self.parents[score[0]].Start_Simulation("GUI")
 
     def Show_Body(self):
         self.parents[0].Start_Simulation("GUI")
