@@ -150,5 +150,19 @@ class PARALLEL_HILL_CLIMBER_CUBES:
         print(self.parents[bestindex].fitness)
         self.parents[bestindex].Start_Simulation("GUI")
 
+<<<<<<< Updated upstream
+=======
+    def Show_All(self):
+        bestindex = 0
+        scores = []
+        for parent in self.parents:
+            scores.append((parent, self.parents[parent].fitness))
+        scores.sort(key=lambda x: x[-1], reverse=True)
+        for score in scores:
+            if score[1] > 10:
+                continue
+            self.parents[score[0]].Start_Simulation("GUI")
+
+>>>>>>> Stashed changes
     def Show_Body(self):
         self.parents[0].Start_Simulation("GUI")
