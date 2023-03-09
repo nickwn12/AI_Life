@@ -23,9 +23,11 @@ class SIMULATION:
 
     def Run(self):
         for i in range(c.numSteps):
+            if c.numSteps//2 == i:
+                self.Get_FitnessHalfway()
             p.stepSimulation()
             self.robot.Sense(i)
-            self.robot.Think()
+            self.robot.Think(i)
             self.robot.Act()
             if self.directOrGUI == "GUI":
                 time.sleep(.01)
@@ -33,4 +35,5 @@ class SIMULATION:
     def Get_Fitness(self):
         self.robot.Get_Fitness()
 
-
+    def Get_FitnessHalfway(self):
+        self.robot.Get_FitnessHalfway()

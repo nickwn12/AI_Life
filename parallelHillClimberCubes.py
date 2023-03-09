@@ -38,12 +38,26 @@ class PARALLEL_HILL_CLIMBER_CUBES:
         curMax += 1
         pickle.dump(self, open('pickleFolder/test'+str(curMax)+'.pkl', 'wb'))
 
+    def saveGeneration(self, gen):
+        pickle.dump(self, open(
+            'generation/generation'+str(gen)+'.pkl', 'wb'))
+
     def Evolve(self):
         self.Evaluate(self.parents)
         numberOfGenerations = c.numberOfGenerations
         for currentGeneration in range(numberOfGenerations):
             print("Cur Gen is", currentGeneration)
             self.Evolve_For_One_Generation()
+
+    def EvolveAndSave(self):
+        self.Evaluate(self.parents)
+        currentGeneration = 0
+        while True:
+            print("Cur Gen is", currentGeneration)
+            self.Evolve_For_One_Generation()
+            if currentGeneration % 10 == 0:
+                self.saveGeneration(currentGeneration)
+            currentGeneration += 1
 
     def recordGeneration(self):
         for parent in self.parents:
@@ -63,7 +77,7 @@ class PARALLEL_HILL_CLIMBER_CUBES:
         self.Mutate()
         self.Evaluate(self.children)
         self.Select()
-        self.recordGeneration()
+        # self.recordGeneration()
 
         self.Print()
         self.generationsTrained += 1
@@ -99,7 +113,10 @@ class PARALLEL_HILL_CLIMBER_CUBES:
         for parent in self.parents:
             parentFit = self.parents[parent].fitness
             childFit = self.children[parent].fitness
-            if parentFit < childFit and abs(childFit/parentFit) < 2:
+            if parentFit < childFit:
+                # This is to make sure that the robot was not flying or anything but I think it caused
+                # Problems
+                # if parentFit < childFit and abs(childFit/parentFit) < 10:
                 self.parents[parent] = copy.deepcopy(self.children[parent])
         worstParent = 0
         worstScore = self.parents[worstParent].fitness
@@ -110,7 +127,14 @@ class PARALLEL_HILL_CLIMBER_CUBES:
             if self.parents[parent].fitness > bestScore:
                 bestScore = self.parents[parent].fitness
                 bestParent = parent
-        if random.random() * 3 < 2:
+            if self.parents[parent].fitness < worstScore:
+                worstScore = self.parents[parent].fitness
+                worstParent = parent
+        # if random.random() * 3 < 2:
+        if random.random() > 2:
+            print(worstParent, bestParent)
+            print(self.parents[worstParent].fitness)
+            print(self.parents[bestParent].fitness)
             self.parents[worstParent] = copy.deepcopy(self.parents[bestParent])
 
         # totalScore = 0
@@ -125,10 +149,10 @@ class PARALLEL_HILL_CLIMBER_CUBES:
         #     self.parents[orderParents[i]
         #                  ] = copy.deepcopy(self.parents[orderParents[-i]])
 
-        best = 0
-        for parent in self.parents:
-            if self.parents[parent].fitness > self.parents[best].fitness:
-                best = parent
+        # best = 0
+        # for parent in self.parents:
+        #     if self.parents[parent].fitness > self.parents[best].fitness:
+        #         best = parent
 
         # bstParent = copy.deepcopy(self.parents[best])
         # for parent in self.parents:
@@ -158,7 +182,8 @@ class PARALLEL_HILL_CLIMBER_CUBES:
         scores.sort(key=lambda x: x[-1], reverse=True)
         for score in scores:
             if score[1] > 10:
-                continue
+                # continue
+                nick = 5
             self.parents[score[0]].Start_Simulation("GUI")
 
     def Show_Body(self):

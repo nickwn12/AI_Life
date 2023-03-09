@@ -29,10 +29,13 @@ class NEURAL_NETWORK:
 
         print("")
 
-    def Update(self):
+    def Update(self,itr = 0):
         for neuron in self.neurons.keys():
             if self.neurons[neuron].Is_Sensor_Neuron():
-                self.neurons[neuron].Update_Sensor_Neuron()
+                if self.neurons[neuron].Get_Link_Name() == "sinWave":
+                    self.neurons[neuron].Update_sinWave_Neuron(itr)
+                else:
+                    self.neurons[neuron].Update_Sensor_Neuron()
             else:
                 self.neurons[neuron].Update_Hidden_Or_Motor_Neuron(
                     self.neurons, self.synapses)

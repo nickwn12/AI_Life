@@ -29,6 +29,7 @@ class ROBOT:
         self.sensors = {}
         for linkName in pyrosim.linkNamesToIndices:
             self.sensors[linkName] = SENSOR(linkName)
+        self.sensors["sinWave"] = SENSOR("sinWave")
 
     def Prepare_To_Act(self):
         self.motors = {}
@@ -36,12 +37,10 @@ class ROBOT:
             self.motors[jointName] = MOTOR(jointName)
 
     def Sense(self, itr):
-        print("think")
         for sensor in self.sensors:
             self.sensors[sensor].Get_Value(itr)
 
     def Act(self):
-        print("act")
         for neuronName in self.nn.Get_Neuron_Names():
             if self.nn.Is_Motor_Neuron(neuronName):
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
@@ -49,8 +48,25 @@ class ROBOT:
                     neuronName) * c.motorJointRange
                 self.motors[jointName].Set_Value(self, desiredAngle)
 
-    def Think(self):
-        self.nn.Update()
+    def Think(self, itr=0):
+        self.nn.Update(itr=itr)
+
+    def Get_FitnessHalfway(self):
+        best = 10000000
+        for i in range(c.numLinks):
+            stateOfLinkZero = p.getLinkState(self.robotId, i)
+            if stateOfLinkZero is None:
+                continue
+            positionOfLinkZero = stateOfLinkZero[0]
+            yCoordinateOfLinkZero = positionOfLinkZero[1]
+            if yCoordinateOfLinkZero < best:
+                best = yCoordinateOfLinkZero
+
+        f = open("tempHalfway"+str(self.solutionID)+".txt", "w")
+        f.write(str(best))
+        f.close()
+        os.system("mv tempHalfway" + str(self.solutionID) +
+                  ".txt fitnessHalfway" + str(self.solutionID)+".txt")
 
     def Get_Fitness(self):
         best = 10000000
@@ -63,8 +79,13 @@ class ROBOT:
             if yCoordinateOfLinkZero < best:
                 best = yCoordinateOfLinkZero
 
+        f = open("fitnessHalfway"+str(self.solutionID)+".txt", "r")
+        fitnessHalfway = float(f.read())
+        f.close()
+        os.system("rm fitnessHalfway"+str(self.solutionID)+".txt")
+
         f = open("temp"+str(self.solutionID)+".txt", "w")
-        f.write(str(best))
+        f.write(str(best - fitnessHalfway))
         f.close()
         os.system("mv temp" + str(self.solutionID) +
                   ".txt fitness" + str(self.solutionID)+".txt")

@@ -15,7 +15,7 @@ class CUBES:
         self.Sensors = c.Sensors
         self.numMotorNeurons = c.numMotorNeurons
         self.weights = np.random.rand(
-            self.numSensors, self.numMotorNeurons) * 2 - 1
+            self.numSensors + 1, self.numMotorNeurons) * 2 - 1
         self.createBodyWithXCubes(x)
 
     def getWeights(self):
@@ -31,7 +31,7 @@ class CUBES:
             self.mutateBrain()
 
     def mutateBrain(self):
-        randomRow = random.randint(0, self.numSensors - 1)
+        randomRow = random.randint(0, self.numSensors)
         randomColumn = random.randint(0, self.numMotorNeurons - 1)
         self.weights[randomRow, randomColumn] = random.random() * 2 - 1
 
@@ -151,19 +151,19 @@ class CUBES:
                 if Xdif < 0:
                     xAnchorChild *= -1
 
-                JointAxis1 = "1 0 0"
+                JointAxis1 = "0 1 1"
                 JointAxis2 = "0 1 0"
             elif abs(Ydif) > abs(Zdif):
                 yAnchorChild = .5
                 if Ydif < 0:
                     yAnchorChild *= -1
-                JointAxis1 = "0 1 0"
+                JointAxis1 = "1 0 1"
                 JointAxis2 = "1 0 0"
             else:
                 zAnchorChild = .5
                 if Zdif < 0:
                     zAnchorChild *= -1
-                JointAxis1 = "0 1 0"
+                JointAxis1 = "1 1 0"
                 JointAxis2 = "1 0 0"
 
             if child.cubeName in self.Sensors:
@@ -192,6 +192,9 @@ class CUBES:
         for i, sensorNum in enumerate(c.Sensors):
             pyrosim.Send_Sensor_Neuron(
                 name=i, linkName=str(sensorNum))
+        pyrosim.Send_Sensor_Neuron(
+            name="sinWave", linkName=str("sinWave"))
+
         stack = []
         stack += self.familyTree[0]
         # stack = self.familyTree[0]
@@ -210,5 +213,8 @@ class CUBES:
             for currentColumn in range(self.numMotorNeurons):
                 pyrosim.Send_Synapse(sourceNeuronName=currentRow,
                                      targetNeuronName=currentColumn + self.numSensors, weight=self.weights[currentRow][currentColumn])
+        for currentColumn in range(self.numMotorNeurons):
+            pyrosim.Send_Synapse(sourceNeuronName="sinWave",
+                                 targetNeuronName=currentColumn + self.numSensors, weight=self.weights[-1][currentColumn])
 
         pyrosim.End()
