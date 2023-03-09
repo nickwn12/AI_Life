@@ -5,6 +5,7 @@ import pybullet
 import pyrosim.pyrosim as pyrosim
 
 import pyrosim.constants as c
+import numpy as np
 
 
 class NEURON:
@@ -68,8 +69,12 @@ class NEURON:
         self.value = value
 
     def Update_Sensor_Neuron(self):
+
         self.Set_Value(pyrosim.Get_Touch_Sensor_Value_For_Link(
             self.Get_Link_Name()))
+
+    def Update_sinWave_Neuron(self, itr=0):
+        self.Set_Value(np.sin(itr/100))
 
     def Update_Hidden_Or_Motor_Neuron(self, neurons, synapses):
         self.value = 0

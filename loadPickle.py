@@ -11,23 +11,24 @@ for dir in dir_list:
         continue
     curPath = "pickleFolder/" + dir
     curphcc = pickle.load(open(curPath, 'rb'))
-    print("File: " + dir)
-    print("Generations: " + str(curphcc.generationsTrained))
-    print("Max Fitness: " + str(curphcc.maxFit))
-    print("\n\n")
-    curphcc.listRecordData()
-    Y = curphcc.maxFitList
-    X = list(range(len(Y)))
-    plt.plot(X, Y, '-')
+    curphcc.Show_All()
+    # print("File: " + dir)
+    # print("Generations: " + str(curphcc.generationsTrained))
+    # print("Max Fitness: " + str(curphcc.maxFit))
+    # print("\n\n")
+    # curphcc.listRecordData()
+    # Y = curphcc.maxFitList
+    # X = list(range(len(Y)))
+    # plt.plot(X, Y, '-')
 
-    plt.xlabel("X-axis data")
-    plt.ylabel("Y-axis data")
-    plt.title('multiple plots' + str(counter))
+    # plt.xlabel("X-axis data")
+    # plt.ylabel("Y-axis data")
+    # plt.title('multiple plots' + str(counter))
     counter += 1
 
     nick = 5
-plt.show()
+# plt.show()
 nick = 4
-# curphcc.Show_Best()
+# 
 
 # nick = 5
