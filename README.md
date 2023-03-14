@@ -309,14 +309,13 @@ A random cube can be deleted during the simulation. If a cube is removed, all of
 3. Mutate the Brain Weights
 This process involves randomly changing a weight in the robot's brain to a new value. Although highly random, it allows the robot to eventually develop some form of intelligence.
 
-![Screenshot](ReadMeImages/Screen Shot 2023-03-13 at 10.40.32 PM.png)
+![Screenshot](ReadMeImages/ScreenShot2023-03-13at10.40.32PM.png)
 
 4. Create a Random Cube
 Creating a random cube involves the same process used to generate the original cubes. A cube is added to a random side, and the simulation checks to ensure it does not intersect with any existing cubes.
 
 5. Turn off a Sensor
 Initially, all of the links in the robot's brain function as sensors. As the simulation progresses, the robot may discover that certain information is unnecessary or even detrimental. By turning off sensors, the evolutionary algorithm has a higher chance of utilizing weight evolution to alter the robot's behavior.
-ReadMeImages/Screen Shot 2023-03-13 at 10.39.07 PM.png
 ![Screenshot](ReadMeImages/ScreenShot2023-03-13at10.39.07PM.png)
 ![Screenshot](ReadMeImages/ScreenShot2023-03-13at10.39.34PM.png)
 
