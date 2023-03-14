@@ -78,6 +78,8 @@ class NEURON:
 
     def Update_Hidden_Or_Motor_Neuron(self, neurons, synapses):
         self.value = 0
+        # print(neurons)
+        # print(synapses)
         for synapse in synapses.values():
             if synapse.targetNeuronName == self.name:
                 self.Allow_Presynaptic_Neuron_To_Influence_Me(

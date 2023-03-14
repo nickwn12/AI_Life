@@ -4,10 +4,12 @@ from parallelHillClimberCubes import PARALLEL_HILL_CLIMBER_CUBES
 import random
 
 
-for i in range(1):
+for i in range(10):
+
     random.seed(i)
     phc = PARALLEL_HILL_CLIMBER_CUBES()
-    phc.Show_Body()
+    
+    # phc.Show_Body()
     phc.Evolve()
     phc.save()
     phc.Show_Best()
