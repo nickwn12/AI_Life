@@ -72,8 +72,7 @@ for dir in dir_list:
         filePath = 'plots/' + fileLocation + '.png'
         plt.savefig(filePath)
         plt.show()
-        print("""![Alt text](relative % 20""" +
-              filePath + """raw=true "Title")""")
+        print("![Screenshot](" + filePath + ")")
         plt.clf()
 
     # nick = 5
