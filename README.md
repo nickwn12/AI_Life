@@ -110,7 +110,7 @@ Population: 10
 Total Simulations: 2000
 Best Fitness of Model: 6.969525415513104
 
-![Screenshot](plots/test66.pngraw=true "Title")
+![Screenshot](/plots/test66.png)
 Path: pickleFolder/test65.pkl
 Generations Trained: 50
 Population: 50
