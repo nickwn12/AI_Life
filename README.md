@@ -109,43 +109,69 @@ Generations Trained: 200
 Population: 10
 Total Simulations: 2000
 Best Fitness of Model: 6.969525415513104
+Path: pickleFolder/test69.pkl
+Generations Trained: 200
+Population: 10
+Total Simulations: 2000
+Best Fitness of Model: 19.301054933851532
 
-![Screenshot](/plots/test66.png)
+![Screenshot](plots/test69.png)
+Path: pickleFolder/test68.pkl
+Generations Trained: 200
+Population: 10
+Total Simulations: 2000
+Best Fitness of Model: 7.371755589279394
+
+![Screenshot](plots/test68.png)
+Path: pickleFolder/test67.pkl
+Generations Trained: 200
+Population: 10
+Total Simulations: 2000
+Best Fitness of Model: 11.374880990639998
+
+![Screenshot](plots/test67.png)
+Path: pickleFolder/test66.pkl
+Generations Trained: 200
+Population: 10
+Total Simulations: 2000
+Best Fitness of Model: 6.969525415513104
+
+![Screenshot](plots/test66.png)
 Path: pickleFolder/test65.pkl
 Generations Trained: 50
 Population: 50
 Total Simulations: 2500
 Best Fitness of Model: 9.105079390305512
 
-![Alt text](relative % 20plots/test65.pngraw=true "Title")
+![Screenshot](plots/test65.png)
 Path: pickleFolder/test64.pkl
 Generations Trained: 50
 Population: 50
 Total Simulations: 2500
 Best Fitness of Model: 11.580110052813495
 
-![Alt text](relative % 20plots/test64.pngraw=true "Title")
+![Screenshot](plots/test64.png)
 Path: pickleFolder/test63.pkl
 Generations Trained: 50
 Population: 10
 Total Simulations: 500
 Best Fitness of Model: 3.9260061237295454
 
-![Alt text](relative % 20plots/test63.pngraw=true "Title")
+![Screenshot](plots/test63.png)
 Path: pickleFolder/test62.pkl
 Generations Trained: 500
 Population: 10
 Total Simulations: 5000
 Best Fitness of Model: 11.466548383868778
 
-![Alt text](relative % 20plots/test62.pngraw=true "Title")
+![Screenshot](plots/test62.png)
 Path: pickleFolder/test61.pkl
 Generations Trained: 500
 Population: 10
 Total Simulations: 5000
 Best Fitness of Model: 12.949485588748605
 
-![Alt text](relative % 20plots/test61.pngraw=true "Title")
+![Screenshot](plots/test61.png)
 Path: pickleFolder/test60.pkl
 Generations Trained: 500
 Population: 10
