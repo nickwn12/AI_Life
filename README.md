@@ -11,8 +11,13 @@ To build the Robot I created a new class called Cubes. This was both inspired by
 
 The Cubes class would have a self.weights to control and create the brain. It would have a tree of parents which would keep the ordering of which cubes had which parents. It would contain a list of everysingle cube its height, length, width, as well as the data concering if each cube was a sensor or a not. This was all put in a class called Cube. Cubes was a a collection of Cube. The Cubes class could create a robot create the body and the brain. 
 
-![Screenshot](plots/Cube Class.jpeg)
-![Screenshot](plots/CubesClass.jpeg)
+
+# Video 
+https://www.youtube.com/watch?v=PM8tpkzQx4k&feature=youtu.be
+
+Gif 
+![](ReadMeImages/ezgif.com-video-to-gif.gif)
+
 
 
 ## Authors
@@ -271,6 +276,18 @@ The code for this project is categorized into two main sections: those that I wa
 
 The Cubes class stores a family tree that keeps track of which cubes are connected to each other. A cube can have multiple children but only one parent, allowing for a tree representation of the cube. This is relevant when deleting Cubes. Additionally, the Cubes class generates the original body, as shown in Figure X. The process involves placing an original cube and calling the "add random cube" method to select a random cube from the Cubes class. This method attempts to add a cube to a free edge of the base cube that has not yet been assigned. Afterward, it checks all previously added cubes to ensure that they do not intersect. The Cubes class assigns random lengths, widths, and heights to build random bodies that do not look the same. It also creates a brain for controlling the robots, which consists of a set of weights of size (Number of Sensors + 1, Number of Motors). The extra row represents a sine wave of time to allow the robot to have a separate rhythm from the sensors' observations.
 
+![Screenshot](plots/CubeClass.jpeg)
+![Screenshot](plots/CubesClass.jpeg)
+![Screenshot](ReadMeImages/ScreenShot2023-03-13at10.40.56PM.png)
+![Screenshot](ReadMeImages/ScreenShot2023-03-13at10.40.42PM.png)
+![Screenshot](ReadMeImages/ScreenShot2023-03-13at10.40.05PM.png)
+![Screenshot](ReadMeImages/ScreenShot2023-03-13at10.40.13PM.png)
+
+Diagram of the Brain
+
+
+![Screenshot](ReadMeImages/ScreenShot 2023-03-13 at 10.39.49 PM.png)
+
 Once a body that meets the desired number of links and sensors is generated using the Cubes class, it needs to be converted into a format that Pyrosim can understand. This involves creating the base cube and then adding all its children to a stack. The Cubes class builds each child cube and the joint connecting it to its parent cube. Each cube keeps track of its parent independently of the family tree for convenience. Once a child is added to the Pyrosim body, the code checks whether it has any kids and adds them to the stack. This process continues until no cubes are left in the stack, and every cube and joint has been appropriately added. Then, the brain is created, involving going through each sensor and adding a synapse with a weight[sensorIndex][Motor Neuron]. It also adds a synapse for the sine input for each motor neuron, as shown in Figure X. Finally, the resulting body and brain are stored in .nndf and .urdf files, respectively, for use in the Pyrosim simulation.
 
 I believed that the robots would benefit from perceiving a rhythm to form a repetitive motion without relying solely on ground sensors to establish a pattern. To achieve this, I manually modified the code and incorporated a new type of sensor neuron that I named the 'sine neuron.' This neuron utilized a mathematical function that involved dividing the number of steps by 100 and applying the np sine function to it. Although this modification may appear straightforward in hindsight, it was, in reality, a challenging and time-consuming task to implement.
@@ -292,14 +309,22 @@ A random cube can be deleted during the simulation. If a cube is removed, all of
 3. Mutate the Brain Weights
 This process involves randomly changing a weight in the robot's brain to a new value. Although highly random, it allows the robot to eventually develop some form of intelligence.
 
+![Screenshot](ReadMeImages/Screen Shot 2023-03-13 at 10.40.32 PM.png)
+
 4. Create a Random Cube
 Creating a random cube involves the same process used to generate the original cubes. A cube is added to a random side, and the simulation checks to ensure it does not intersect with any existing cubes.
 
 5. Turn off a Sensor
 Initially, all of the links in the robot's brain function as sensors. As the simulation progresses, the robot may discover that certain information is unnecessary or even detrimental. By turning off sensors, the evolutionary algorithm has a higher chance of utilizing weight evolution to alter the robot's behavior.
+ReadMeImages/Screen Shot 2023-03-13 at 10.39.07 PM.png
+![Screenshot](ReadMeImages/ScreenShot2023-03-13at10.39.07PM.png)
+![Screenshot](ReadMeImages/ScreenShot2023-03-13at10.39.34PM.png)
+
 
 6. Turn on a Sensor
 Occasionally, the robot may need to turn on a previously disabled sensor. This process requires adjusting the robot's brain to account for the new sensor's input. However, this situation is rare and typically only occurs when a sensor was previously disabled.
+
+![Screenshot](ReadMeImages/ScreenShot2023-03-13at10.39.25PM.png)
 
 Parallel Hill Climber Class
 
@@ -338,243 +363,12 @@ It is recommended to use machine learning libraries like TensorFlow or PyTorch t
 
 If I were to do this again to make the robots appear more lifelike, one thing that I would do would be to have the power of the motor neuron relate to the volumes of the links that it is attached to. This would require thicker joints where the most power is needed, while thinner joints would suffice for balancing. I would also remodel the neural networks. Currently, I only have one neural network with no hidden nodes or activation functions. This was due to time constraints, which I am not proud of, but they existed. Completing this would have taken a significant amount of time, and this project has already taken me 30+ hours. Finally, I would try to find a way to run my programs on a virtual computer so that I could run them throughout the day. Running all the programs on my Mac was incredibly frustrating, and I wish I had another option. This frustrated me greatly. I also want to mention that I do not have all of my graphs for fitness versus generations trained, as I commented out the code before running it overnight, and I only had enough time to run a few models before turning it in. I understand it is in the rubric, but I am asking for leniency due to the effort I put into the rest of the project. This was incredibly intensive, even with the changes made to the project.
 
-ath: pickleFolder/test36.pkl
-Generations Trained: 300
-Population: 25
-Total Simulations: 7500
-Best Fitness of Model: 12.21181680529474
-/Users/nicholaswoel-nogueira/Documents/Senior Year/Winter/AI Life/PythonEnviorment/AI_Life/loadPickle.py:47: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-  my_df = my_df.append(dictAppended,
+![Screenshot](ReadMeImages/Picture1.png)
+![Screenshot](ReadMeImages/Picture2.png)
+![Screenshot](ReadMeImages/Picture3.png)
+![Screenshot](ReadMeImages/Picture5.png)
 
-Path: pickleFolder/test35.pkl
-Generations Trained: 200
-Population: 10
-Total Simulations: 2000
-Best Fitness of Model: 7.614822129399039
-/Users/nicholaswoel-nogueira/Documents/Senior Year/Winter/AI Life/PythonEnviorment/AI_Life/loadPickle.py:47: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-  my_df = my_df.append(dictAppended,
 
-Path: pickleFolder/test34.pkl
-Generations Trained: 200
-Population: 10
-Total Simulations: 2000
-Best Fitness of Model: 7.75795958553575
-/Users/nicholaswoel-nogueira/Documents/Senior Year/Winter/AI Life/PythonEnviorment/AI_Life/loadPickle.py:47: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-  my_df = my_df.append(dictAppended,
-
-Path: pickleFolder/test33.pkl
-Generations Trained: 200
-Population: 10
-Total Simulations: 2000
-Best Fitness of Model: 12.820376490749497
-/Users/nicholaswoel-nogueira/Documents/Senior Year/Winter/AI Life/PythonEnviorment/AI_Life/loadPickle.py:47: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-  my_df = my_df.append(dictAppended,
-
-(base) nicholaswoel-nogueira@Nicholass-MacBook-Pro-110 AI_Life %  cd /Users/nicholaswoel-nogueira/Documents/Senior\ Year/Winte
-r/AI\ Life/PythonEnviorment/AI_Life ; /usr/bin/env /usr/local/bin/python3 /Users/nicholaswoel-nogueira/.vscode/extensions/ms-p
-ython.python-2023.4.1/pythonFiles/lib/python/debugpy/adapter/../../debugpy/launcher 58492 -- /Users/nicholaswoel-nogueira/Docu
-ments/Senior\ Year/Winter/AI\ Life/PythonEnviorment/AI_Life/loadPickle.py 
-pybullet build time: Jan  8 2023 16:35:18
-[0, 1, 2, 3] 4
-Path: pickleFolder/test65.pkl
-Generations Trained: 50
-Population: 50
-Total Simulations: 2500
-Best Fitness of Model: 9.105079390305512
-
-Path: pickleFolder/test64.pkl
-Generations Trained: 50
-Population: 50
-Total Simulations: 2500
-Best Fitness of Model: 11.580110052813495
-
-Path: pickleFolder/test63.pkl
-Generations Trained: 50
-Population: 10
-Total Simulations: 500
-Best Fitness of Model: 3.9260061237295454
-
-Path: pickleFolder/test62.pkl
-Generations Trained: 500
-Population: 10
-Total Simulations: 5000
-Best Fitness of Model: 11.466548383868778
-
-Path: pickleFolder/test61.pkl
-Generations Trained: 500
-Population: 10
-Total Simulations: 5000
-Best Fitness of Model: 12.949485588748605
-
-Path: pickleFolder/test60.pkl
-Generations Trained: 500
-Population: 10
-Total Simulations: 5000
-Best Fitness of Model: 10.504130684149974
-
-Path: pickleFolder/test59.pkl
-Generations Trained: 200
-Population: 25
-Total Simulations: 5000
-Best Fitness of Model: 25.99498191365418
-
-Path: pickleFolder/test58.pkl
-Generations Trained: 200
-Population: 25
-Total Simulations: 5000
-Best Fitness of Model: 17.015708174629516
-
-Path: pickleFolder/test57.pkl
-Generations Trained: 100
-Population: 10
-Total Simulations: 1000
-Best Fitness of Model: 5.803501041868914
-
-Path: pickleFolder/test56.pkl
-Generations Trained: 100
-Population: 10
-Total Simulations: 1000
-Best Fitness of Model: 5.4811631830241385
-
-Path: pickleFolder/test55.pkl
-Generations Trained: 100
-Population: 10
-Total Simulations: 1000
-Best Fitness of Model: 13.59828398706952
-
-Path: pickleFolder/test54.pkl
-Generations Trained: 100
-Population: 10
-Total Simulations: 1000
-Best Fitness of Model: 7.282209728287096
-
-Path: pickleFolder/test53.pkl
-Generations Trained: 100
-Population: 10
-Total Simulations: 1000
-Best Fitness of Model: 5.601628893405993
-
-Path: pickleFolder/test52.pkl
-Generations Trained: 100
-Population: 10
-Total Simulations: 1000
-Best Fitness of Model: 6.094847085421369
-
-Path: pickleFolder/test51.pkl
-Generations Trained: 100
-Population: 10
-Total Simulations: 1000
-Best Fitness of Model: 7.134761360379178
-
-Path: pickleFolder/test50.pkl
-Generations Trained: 100
-Population: 10
-Total Simulations: 1000
-Best Fitness of Model: 8.549638168845032
-
-Path: pickleFolder/test49.pkl
-Generations Trained: 100
-Population: 10
-Total Simulations: 1000
-Best Fitness of Model: 8.385577491287986
-
-Path: pickleFolder/test48.pkl
-Generations Trained: 500
-Population: 10
-Total Simulations: 5000
-Best Fitness of Model: 17.500675259816738
-
-Path: pickleFolder/test47.pkl
-Generations Trained: 500
-Population: 10
-Total Simulations: 5000
-Best Fitness of Model: 7.957729572482561
-
-Path: pickleFolder/test46.pkl
-Generations Trained: 100
-Population: 10
-Total Simulations: 1000
-Best Fitness of Model: 18.85316928507671
-
-Path: pickleFolder/test45.pkl
-Generations Trained: 500
-Population: 10
-Total Simulations: 5000
-Best Fitness of Model: 4.483399110661695
-
-Path: pickleFolder/test44.pkl
-Generations Trained: 500
-Population: 10
-Total Simulations: 5000
-Best Fitness of Model: 8.851402238025642
-
-Path: pickleFolder/test43.pkl
-Generations Trained: 500
-Population: 10
-Total Simulations: 5000
-Best Fitness of Model: 9.052847871349405
-
-Path: pickleFolder/test42.pkl
-Generations Trained: 500
-Population: 10
-Total Simulations: 5000
-Best Fitness of Model: 8.737500734802088
-
-Path: pickleFolder/test41.pkl
-Generations Trained: 100
-Population: 10
-Total Simulations: 1000
-Best Fitness of Model: 7.563675481227737
-
-Path: pickleFolder/test40.pkl
-Generations Trained: 100
-Population: 10
-Total Simulations: 1000
-Best Fitness of Model: 5.100512449003548
-
-Path: pickleFolder/test39.pkl
-Generations Trained: 100
-Population: 5
-Total Simulations: 500
-Best Fitness of Model: 4.063378192392414
-
-Path: pickleFolder/test38.pkl
-Generations Trained: 300
-Population: 25
-Total Simulations: 7500
-Best Fitness of Model: 6.562502111004393
-
-Path: pickleFolder/test37.pkl
-Generations Trained: 300
-Population: 25
-Total Simulations: 7500
-Best Fitness of Model: 7.324944974026716
-
-Path: pickleFolder/test36.pkl
-Generations Trained: 300
-Population: 25
-Total Simulations: 7500
-Best Fitness of Model: 12.21181680529474
-
-Path: pickleFolder/test35.pkl
-Generations Trained: 200
-Population: 10
-Total Simulations: 2000
-Best Fitness of Model: 7.614822129399039
-
-Path: pickleFolder/test34.pkl
-Generations Trained: 200
-Population: 10
-Total Simulations: 2000
-Best Fitness of Model: 7.75795958553575
-
-Path: pickleFolder/test33.pkl
-Generations Trained: 200
-Population: 10
-Total Simulations: 2000
-Best Fitness of Model: 12.820376490749497
-
-The total Simulations run together was 101,500
 
 ## Acknowledgements
 
