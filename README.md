@@ -15,7 +15,7 @@ The Cubes class would have a self.weights to control and create the brain. It wo
 # Video 
 https://www.youtube.com/watch?v=PM8tpkzQx4k&feature=youtu.be
 
-Gif 
+# Gif 
 ![](ReadMeImages/ezgif.com-video-to-gif.gif)
 
 
