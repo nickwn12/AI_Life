@@ -23,8 +23,6 @@ class PARALLEL_HILL_CLIMBER_CUBES:
             self.parents[i] = SOLUTIONCUBES(self.nextAvailableID)
             self.nextAvailableID += 1
 
-        # self.parent = SOLUTION()
-
     def save(self):
 
         dir_list = os.listdir("pickleFolder/")
@@ -77,7 +75,7 @@ class PARALLEL_HILL_CLIMBER_CUBES:
         self.Mutate()
         self.Evaluate(self.children)
         self.Select()
-        # self.recordGeneration()
+        self.recordGeneration()
 
         self.Print()
         self.generationsTrained += 1
@@ -131,7 +129,7 @@ class PARALLEL_HILL_CLIMBER_CUBES:
                 worstScore = self.parents[parent].fitness
                 worstParent = parent
         # if random.random() * 3 < 2:
-        if random.random() > 2:
+        if random.random() < .025:
             print(worstParent, bestParent)
             print(self.parents[worstParent].fitness)
             print(self.parents[bestParent].fitness)
@@ -169,10 +167,26 @@ class PARALLEL_HILL_CLIMBER_CUBES:
 
         for parent in self.parents:
             print(self.parents[bestindex].fitness)
-            self.parents[bestindex].fitness > self.parents[parent].fitness
-            bestindex = parent
+            if self.parents[bestindex].fitness < self.parents[parent].fitness:
+                bestindex = parent
         print(self.parents[bestindex].fitness)
         self.parents[bestindex].Start_Simulation("GUI")
+
+    def Get_Best(self):
+        bestindex = 0
+        for parent in self.parents:
+            # print(self.parents[bestindex].fitness)
+            if self.parents[bestindex].fitness < self.parents[parent].fitness:
+                bestindex = parent
+        return self.parents[bestindex]
+
+    def Get_Best_Fitness(self):
+        bestindex = 0
+        for parent in self.parents:
+            # print(self.parents[bestindex].fitness)
+            if self.parents[bestindex].fitness < self.parents[parent].fitness:
+                bestindex = parent
+        return self.parents[bestindex].fitness
 
     def Show_All(self):
         bestindex = 0

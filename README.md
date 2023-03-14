@@ -82,3 +82,236 @@ I also wanted to Acknowledge that I took advantage of the advice that you gave i
 
 - [@octokatherine](https://www.github.com/octokatherine)
 
+
+Path: pickleFolder/test69.pkl
+Generations Trained: 200
+Population: 10
+Total Simulations: 2000
+Best Fitness of Model: 19.301054933851532
+
+![Alt text](relative % 20plots/test69.pngraw=true "Title")
+Path: pickleFolder/test68.pkl
+Generations Trained: 200
+Population: 10
+Total Simulations: 2000
+Best Fitness of Model: 7.371755589279394
+
+![Alt text](relative % 20plots/test68.pngraw=true "Title")
+Path: pickleFolder/test67.pkl
+Generations Trained: 200
+Population: 10
+Total Simulations: 2000
+Best Fitness of Model: 11.374880990639998
+
+![Alt text](relative % 20plots/test67.pngraw=true "Title")
+Path: pickleFolder/test66.pkl
+Generations Trained: 200
+Population: 10
+Total Simulations: 2000
+Best Fitness of Model: 6.969525415513104
+
+![Screenshot](plots/test66.pngraw=true "Title")
+Path: pickleFolder/test65.pkl
+Generations Trained: 50
+Population: 50
+Total Simulations: 2500
+Best Fitness of Model: 9.105079390305512
+
+![Alt text](relative % 20plots/test65.pngraw=true "Title")
+Path: pickleFolder/test64.pkl
+Generations Trained: 50
+Population: 50
+Total Simulations: 2500
+Best Fitness of Model: 11.580110052813495
+
+![Alt text](relative % 20plots/test64.pngraw=true "Title")
+Path: pickleFolder/test63.pkl
+Generations Trained: 50
+Population: 10
+Total Simulations: 500
+Best Fitness of Model: 3.9260061237295454
+
+![Alt text](relative % 20plots/test63.pngraw=true "Title")
+Path: pickleFolder/test62.pkl
+Generations Trained: 500
+Population: 10
+Total Simulations: 5000
+Best Fitness of Model: 11.466548383868778
+
+![Alt text](relative % 20plots/test62.pngraw=true "Title")
+Path: pickleFolder/test61.pkl
+Generations Trained: 500
+Population: 10
+Total Simulations: 5000
+Best Fitness of Model: 12.949485588748605
+
+![Alt text](relative % 20plots/test61.pngraw=true "Title")
+Path: pickleFolder/test60.pkl
+Generations Trained: 500
+Population: 10
+Total Simulations: 5000
+Best Fitness of Model: 10.504130684149974
+
+Path: pickleFolder/test59.pkl
+Generations Trained: 200
+Population: 25
+Total Simulations: 5000
+Best Fitness of Model: 25.99498191365418
+
+Path: pickleFolder/test58.pkl
+Generations Trained: 200
+Population: 25
+Total Simulations: 5000
+Best Fitness of Model: 17.015708174629516
+
+Path: pickleFolder/test57.pkl
+Generations Trained: 100
+Population: 10
+Total Simulations: 1000
+Best Fitness of Model: 5.803501041868914
+
+Path: pickleFolder/test56.pkl
+Generations Trained: 100
+Population: 10
+Total Simulations: 1000
+Best Fitness of Model: 5.4811631830241385
+
+Path: pickleFolder/test55.pkl
+Generations Trained: 100
+Population: 10
+Total Simulations: 1000
+Best Fitness of Model: 13.59828398706952
+
+Path: pickleFolder/test54.pkl
+Generations Trained: 100
+Population: 10
+Total Simulations: 1000
+Best Fitness of Model: 7.282209728287096
+
+Path: pickleFolder/test53.pkl
+Generations Trained: 100
+Population: 10
+Total Simulations: 1000
+Best Fitness of Model: 5.601628893405993
+
+Path: pickleFolder/test52.pkl
+Generations Trained: 100
+Population: 10
+Total Simulations: 1000
+Best Fitness of Model: 6.094847085421369
+
+Path: pickleFolder/test51.pkl
+Generations Trained: 100
+Population: 10
+Total Simulations: 1000
+Best Fitness of Model: 7.134761360379178
+
+Path: pickleFolder/test50.pkl
+Generations Trained: 100
+Population: 10
+Total Simulations: 1000
+Best Fitness of Model: 8.549638168845032
+
+Path: pickleFolder/test49.pkl
+Generations Trained: 100
+Population: 10
+Total Simulations: 1000
+Best Fitness of Model: 8.385577491287986
+
+Path: pickleFolder/test48.pkl
+Generations Trained: 500
+Population: 10
+Total Simulations: 5000
+Best Fitness of Model: 17.500675259816738
+
+Path: pickleFolder/test47.pkl
+Generations Trained: 500
+Population: 10
+Total Simulations: 5000
+Best Fitness of Model: 7.957729572482561
+
+Path: pickleFolder/test46.pkl
+Generations Trained: 100
+Population: 10
+Total Simulations: 1000
+Best Fitness of Model: 18.85316928507671
+
+Path: pickleFolder/test45.pkl
+Generations Trained: 500
+Population: 10
+Total Simulations: 5000
+Best Fitness of Model: 4.483399110661695
+
+Path: pickleFolder/test44.pkl
+Generations Trained: 500
+Population: 10
+Total Simulations: 5000
+Best Fitness of Model: 8.851402238025642
+
+Path: pickleFolder/test43.pkl
+Generations Trained: 500
+Population: 10
+Total Simulations: 5000
+Best Fitness of Model: 9.052847871349405
+
+Path: pickleFolder/test42.pkl
+Generations Trained: 500
+Population: 10
+Total Simulations: 5000
+Best Fitness of Model: 8.737500734802088
+
+Path: pickleFolder/test41.pkl
+Generations Trained: 100
+Population: 10
+Total Simulations: 1000
+Best Fitness of Model: 7.563675481227737
+
+Path: pickleFolder/test40.pkl
+Generations Trained: 100
+Population: 10
+Total Simulations: 1000
+Best Fitness of Model: 5.100512449003548
+
+Path: pickleFolder/test39.pkl
+Generations Trained: 100
+Population: 5
+Total Simulations: 500
+Best Fitness of Model: 4.063378192392414
+
+Path: pickleFolder/test38.pkl
+Generations Trained: 300
+Population: 25
+Total Simulations: 7500
+Best Fitness of Model: 6.562502111004393
+
+Path: pickleFolder/test37.pkl
+Generations Trained: 300
+Population: 25
+Total Simulations: 7500
+Best Fitness of Model: 7.324944974026716
+
+Path: pickleFolder/test36.pkl
+Generations Trained: 300
+Population: 25
+Total Simulations: 7500
+Best Fitness of Model: 12.21181680529474
+
+Path: pickleFolder/test35.pkl
+Generations Trained: 200
+Population: 10
+Total Simulations: 2000
+Best Fitness of Model: 7.614822129399039
+
+Path: pickleFolder/test34.pkl
+Generations Trained: 200
+Population: 10
+Total Simulations: 2000
+Best Fitness of Model: 7.75795958553575
+
+Path: pickleFolder/test33.pkl
+Generations Trained: 200
+Population: 10
+Total Simulations: 2000
+Best Fitness of Model: 12.820376490749497
+
+The total Simulations run was 109500

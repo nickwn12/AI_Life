@@ -1,6 +1,8 @@
 pybullet build time: Jan  8 2023 16:35:18
-[8] 1
+[0, 1, 2, 3] 4
 started
+brainCubes4845.nndf
+brainCubes4845.nndf
 Version = 4.1 INTEL-14.7.28
 Vendor = Intel Inc.
 Renderer = Intel(R) Iris(TM) Plus Graphics OpenGL Engine
@@ -12,12 +14,23 @@ MotionThreadFunc thread started
 b3Printf: b3Warning[examples/Importers/ImportURDFDemo/BulletUrdfImporter.cpp,126]:
 
 b3Printf: expected a world element, continuing without it.
-brainCubes972.nndf
+Traceback (most recent call last):
+  File "/Users/nicholaswoel-nogueira/Documents/Senior Year/Winter/AI Life/PythonEnviorment/AI_Life/simulate.py", line 22, in <module>
+    simulation.Run()
+  File "/Users/nicholaswoel-nogueira/Documents/Senior Year/Winter/AI Life/PythonEnviorment/AI_Life/simulation.py", line 30, in Run
+    self.robot.Sense(i)
+  File "/Users/nicholaswoel-nogueira/Documents/Senior Year/Winter/AI Life/PythonEnviorment/AI_Life/robot.py", line 45, in Sense
+    self.sensors[sensor].Get_Value(itr)
+  File "/Users/nicholaswoel-nogueira/Documents/Senior Year/Winter/AI Life/PythonEnviorment/AI_Life/sensor.py", line 15, in Get_Value
+    self.values[iter] = pyrosim.Get_Touch_Sensor_Value_For_Link(
+  File "/Users/nicholaswoel-nogueira/Documents/Senior Year/Winter/AI Life/PythonEnviorment/AI_Life/pyrosim/pyrosim.py", line 61, in Get_Touch_Sensor_Value_For_Link
+    for pt in pts:
+TypeError: 'NoneType' object is not iterable
 numActiveThreads = 0
 stopping threads
-destroy semaphore
-semaphore destroyed
 Thread with taskId 0 exiting
 Thread TERMINATED
+destroy semaphore
+semaphore destroyed
 destroy main semaphore
 main semaphore destroyed

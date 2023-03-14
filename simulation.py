@@ -22,8 +22,9 @@ class SIMULATION:
         # pyrosim.Prepare_To_Simulate(robotId)
 
     def Run(self):
+        self.robot.Prepare_Robot()
         for i in range(c.numSteps):
-            if c.numSteps//2 == i:
+            if 300 == i:
                 self.Get_FitnessHalfway()
             p.stepSimulation()
             self.robot.Sense(i)

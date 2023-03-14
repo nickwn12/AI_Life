@@ -11,7 +11,7 @@ for dir in dir_list:
         continue
     curPath = "generation/" + dir
     curphcc = pickle.load(open(curPath, 'rb'))
-    curphcc.Show_All()
+    # curphcc.Show_All()
     # print("File: " + dir)
     # print("Generations: " + str(curphcc.generationsTrained))
     # print("Max Fitness: " + str(curphcc.maxFit))

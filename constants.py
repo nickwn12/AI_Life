@@ -1,18 +1,17 @@
 import numpy as np
 import random
-numSteps = 1000
+numSteps = 5000
 amplitudeFrontLeg = np.pi/2
 frequencyFrontLeg = 500
 phaseOffsetFrontLeg = 0
 amplitudeBackLeg = np.pi/2
 frequencyaBackLeg = 20
 phaseOffsetBackLeg = 2
-numberOfGenerations = 300
+numberOfGenerations = 200
 populationSize = 10
-numLinks = 10
+numLinks = 4
 # numSensors = random.randint(2 * numLinks//3, numLinks)
 numSensors = numLinks
-numSensors = 1
 # Sensors = list(range(numLinks))
 Sensors = random.sample(range(0, numLinks), k=numSensors)
 Sensors.sort()

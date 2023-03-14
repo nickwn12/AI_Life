@@ -11,7 +11,7 @@ class CUBE():
         self.centerX = cords[0]
         self.centerY = cords[1]
         self.centerZ = cords[2]
-        self.cubeName = -1
+        self.name = -1
         self.parent = -1
 
         self.Xmin = self.centerX - self.length/2
@@ -24,7 +24,7 @@ class CUBE():
         self.kids = {0: None, 1: None, 2: None, 3: None, 4: None, 5: None}
 
     def nameCube(self, name, parent):
-        self.cubeName = name
+        self.name = name
         self.parent = parent
 
     def addCubeRandomSide(self, cubes):
@@ -69,7 +69,8 @@ class CUBE():
             
 
 
-        cubes.addCube(curCube, self.cubeName)
+        cubes.addCube(curCube, self.name)
+        cubes.addJoint(self.name, curCube.name)
         self.kids[chosenSide] = curCube
         return True
     
@@ -79,9 +80,13 @@ class CUBE():
         self.width = width
 
     def mutateSize(self):
-        self.height = self.height * (random.random() - .5)/10
-        self.length = self.length * (random.random() - .5)/10
-        self.width = self.width * (random.random() - .5)/10
+        ranNum = random.random()
+        if ranNum < 1/3:
+            self.height = self.height * (random.random() - .5)/10
+        elif ranNum < 2/3:
+            self.length = self.length * (random.random() - .5)/10
+        else:
+            self.width = self.width * (random.random() - .5)/10
 
     def intersect(self, Cube):
         if self.Xmin >= Cube.Xmax or self.Xmax <= Cube.Xmin:
